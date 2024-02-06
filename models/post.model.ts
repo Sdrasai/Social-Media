@@ -1,8 +1,11 @@
-import Post from "../interface/post.interface";
-import { Schema, model } from "mongoose";
+import { MediaTypes } from "../interface/post.interface"
+import IPost from "../interface/post.interface"
+
+import { Schema, model } from "mongoose"
 
 const postSchema = new Schema({
-  image: { type: String, required: true },
+  mediaType: { type: String, enum: MediaTypes, default: MediaTypes.Picture },
+  mediaUrl: { type: String },
   caption: { type: String },
   likes: { type: [String] },
   likesNumber: { type: Number },
@@ -10,8 +13,8 @@ const postSchema = new Schema({
   commentsNumber: { type: Number },
   commentsMessage: { type: String },
   saved: { type: Boolean },
-});
+})
 
-const postModel = model("Post", postSchema);
+const postModel = model("Post", postSchema)
 
-export default postModel;
+export default postModel

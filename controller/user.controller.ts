@@ -1,5 +1,3 @@
-import userModel from "../models/user.model"
-import mongoose from "mongoose"
 import UserService from "../service/user.service"
 import { NextFunction, Request, Response } from "express"
 
