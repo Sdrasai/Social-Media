@@ -1,18 +1,40 @@
-export enum MediaTypes {
-  Picture = "picture",
-  Video = "video",
-}
+// export enum MediaTypes {
+//   Picture = "picture",
+//   Video = "video",
+// }
 
-interface IPost {
+// interface IPost {
+//   mediaType: string
+//   mediaUrl: string
+//   caption?: string
+//   likes?: [string]
+//   likesNumber?: number
+//   comments?: [string]
+//   commentsNumber?: number
+//   commentsMessage?: string
+//   saved?: boolean
+// }
+
+// export default IPost
+import { Types } from "mongoose"
+
+export interface IPostData {
+  user: any
   mediaType: string
   mediaUrl: string
   caption: string
-  likes: [string]
-  likesNumber: number
-  comments: [string]
-  commentsNumber: number
-  commentsMessage: string
+  likes: ILikesData
+  comments: ICommentsData
   saved: boolean
 }
 
-export default IPost
+export interface ILikesData {
+  byUser: string[]
+  likesNumber: number
+}
+
+export interface ICommentsData {
+  byUser: string[]
+  commentsMessage: string[]
+  commentsNumber: number
+}

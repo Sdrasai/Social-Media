@@ -4,7 +4,7 @@ interface IUser {
   email: string
   followers?: number
   following?: number
-  // followRequest?: [string]
+  followRequest?: [string]
   post?: []
   savedPost?: []
 }

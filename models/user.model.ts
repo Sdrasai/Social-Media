@@ -7,8 +7,8 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   followers: { type: Number },
   following: { type: Number },
-  // followRequest: { type: [String] },
-  post: { type: Types.ObjectId, ref: "Post" },
+  followRequest: { type: [String] },
+  posts: { type: Types.ObjectId, ref: "Post" },
   savedPost: { type: Types.ObjectId, ref: "Post" },
 })
 

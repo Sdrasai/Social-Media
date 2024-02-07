@@ -11,17 +11,17 @@ class UserController {
         req.body.password,
         req.body.email
       )
-      res.json({ data: newUser }).status(200)
+      res.json(newUser).status(200)
     } catch (err) {
       console.log(err)
       next(err)
     }
   }
 
-  public async getUsers(req: Request, res: Response, next: NextFunction) {
+  public async getAllUsers(req: Request, res: Response, next: NextFunction) {
     try {
       const allUsers = await this.userService.findAllUserService()
-      res.json({ data: allUsers })
+      res.json(allUsers)
     } catch (err) {
       console.log(err)
       next(err)
@@ -33,7 +33,7 @@ class UserController {
       const user = await this.userService.findOneUserService(
         req.params.username
       )
-      res.json({ user }).status(200)
+      res.json(user).status(200)
     } catch (err) {
       console.log(err)
       next(err)
@@ -43,11 +43,17 @@ class UserController {
   public async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.updateUserService(
+        req.params.userId,
         req.body.username,
         req.body.password,
-        req.body.email
+        req.body.email,
+        req.body.followers,
+        req.body.following,
+        req.body.followRequest,
+        req.body.post,
+        req.body.savedPost
       )
-      res.json({ user }).status(200)
+      res.json(user).status(200)
     } catch (err) {
       console.log(err)
       next(err)
@@ -57,10 +63,11 @@ class UserController {
   public async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
       const deletedUser = await this.userService.deleteUserService(
+        req.params.userId,
         req.body.username,
         req.body.password
       )
-      res.json({ deletedUser }).status(200)
+      res.json(deletedUser).status(200)
     } catch (err) {
       console.log(err)
       next(err)

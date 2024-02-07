@@ -7,12 +7,22 @@ class UserService {
   public async createUserService(
     username: string,
     password: string,
-    email: string
+    email: string,
+    followers?: number,
+    following?: number,
+    followRequest?: [string],
+    posts?: [],
+    savedPost?: []
   ) {
     return await this.userModel.create({
       username,
       password,
       email,
+      followers,
+      following,
+      followRequest,
+      posts,
+      savedPost,
     })
   }
 
@@ -25,15 +35,39 @@ class UserService {
   }
 
   public async updateUserService(
+    userId: string,
     username: string,
     password: string,
-    email: string
+    email: string,
+    followers?: number,
+    following?: number,
+    followRequest?: [string],
+    posts?: [],
+    savedPost?: []
   ) {
-    return await this.userModel.updateMany({ username, password, email })
+    return await this.userModel.findByIdAndUpdate({
+      userId,
+      username,
+      password,
+      email,
+      followers,
+      following,
+      followRequest,
+      posts,
+      savedPost,
+    })
   }
 
-  public async deleteUserService(username: string, password: string) {
-    return await this.userModel.deleteMany({ username, password })
+  public async deleteUserService(
+    userId: string,
+    username: string,
+    password: string
+  ) {
+    return await this.userModel.findByIdAndDelete({
+      userId,
+      username,
+      password,
+    })
   }
 }
 
