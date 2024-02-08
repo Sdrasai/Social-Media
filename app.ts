@@ -13,6 +13,7 @@ class App {
     this.port = process.env.PORT
 
     this.dbConnection()
+    this.setupMiddlewares()
     this.setupRoutes(routes)
   }
 
@@ -31,6 +32,11 @@ class App {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  private setupMiddlewares() {
+    this.app.use(express.json())
+    this.app.use(express.urlencoded({ extended: true }))
   }
 
   private setupRoutes(routes: IRoute[]) {

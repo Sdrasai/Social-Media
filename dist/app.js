@@ -21,6 +21,7 @@ class App {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT;
         this.dbConnection();
+        this.setupMiddlewares();
         this.setupRoutes(routes);
     }
     listen() {
@@ -38,6 +39,10 @@ class App {
                 console.log(err);
             }
         });
+    }
+    setupMiddlewares() {
+        this.app.use(express_1.default.json());
+        this.app.use(express_1.default.urlencoded({ extended: true }));
     }
     setupRoutes(routes) {
         routes.forEach((route) => {

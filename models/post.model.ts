@@ -4,10 +4,11 @@ import {
   ILikesData,
   ICommentsData,
 } from "../interface/post.interface"
+import { userSchema } from "./user.model"
 
 const postSchema = new Schema<IPostData>(
   {
-    user: { type: Types.ObjectId, ref: "User", required: true },
+    userId: { type: Types.ObjectId, required: true },
     mediaType: { type: String, enum: ["Picture", "Video"], default: "Picture" }, // Assuming mediaType can be either Picture or Video
     mediaUrl: { type: String, required: true },
     caption: { type: String },

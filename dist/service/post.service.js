@@ -17,11 +17,11 @@ class PostService {
     constructor() {
         this.postModel = post_model_1.default;
     }
-    createPostService(user, mediaType, mediaUrl, caption, likesByUser, comments, saved) {
+    createPostService(userId, mediaType, mediaUrl, caption, likesByUser, comments, saved) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield this.postModel.create({
-                    user,
+                    userId,
                     mediaType,
                     mediaUrl,
                     caption,

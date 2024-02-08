@@ -10,13 +10,22 @@ class UserController {
   @Post("/")
   public async createUsers(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log("salam")
       const newUser = await this.userService.createUserService(
         req.body.username,
         req.body.password,
-        req.body.email
+        req.body.email,
+        req.body.followers,
+        req.body.following,
+        req.body.followRequest,
+        req.body.posts,
+        req.body.savedPost
       )
-      res.json(newUser).status(200)
+      res
+        .json({
+          Message: `${req.body.username} Welcome to our community!`,
+          newUser,
+        })
+        .status(200)
     } catch (err) {
       console.log(err)
       next(err)
@@ -34,7 +43,7 @@ class UserController {
     }
   }
 
-  @Get("/")
+  @Get("/:id")
   public async findOneUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.findOneUserService(
@@ -47,7 +56,7 @@ class UserController {
     }
   }
 
-  @Put("/")
+  @Put("/:id")
   public async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.updateUserService(
@@ -68,7 +77,7 @@ class UserController {
     }
   }
 
-  @Delete("/")
+  @Delete("/:id")
   public async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
       const deletedUser = await this.userService.deleteUserService(

@@ -1,12 +1,13 @@
 import postModel from "../models/post.model"
 import { IPostData } from "../interface/post.interface"
 import { Types } from "mongoose"
+import IUser from "../interface/user.interface"
 
 class PostService {
   private postModel = postModel
 
   async createPostService(
-    user: Types.ObjectId,
+    userId: Types.ObjectId,
     mediaType: string,
     mediaUrl: string,
     caption?: string,
@@ -16,7 +17,7 @@ class PostService {
   ) {
     try {
       return await this.postModel.create({
-        user,
+        userId,
         mediaType,
         mediaUrl,
         caption,

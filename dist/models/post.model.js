@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const postSchema = new mongoose_1.Schema({
-    user: { type: mongoose_1.Types.ObjectId, ref: "User", required: true },
+    userId: { type: mongoose_1.Types.ObjectId, required: true },
     mediaType: { type: String, enum: ["Picture", "Video"], default: "Picture" }, // Assuming mediaType can be either Picture or Video
     mediaUrl: { type: String, required: true },
     caption: { type: String },

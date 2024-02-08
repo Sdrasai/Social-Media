@@ -28,9 +28,13 @@ let UserController = class UserController {
     createUsers(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log("salam");
-                const newUser = yield this.userService.createUserService(req.body.username, req.body.password, req.body.email);
-                res.json(newUser).status(200);
+                const newUser = yield this.userService.createUserService(req.body.username, req.body.password, req.body.email, req.body.followers, req.body.following, req.body.followRequest, req.body.posts, req.body.savedPost);
+                res
+                    .json({
+                    Message: `${req.body.username} Welcome to our community!`,
+                    newUser,
+                })
+                    .status(200);
             }
             catch (err) {
                 console.log(err);
@@ -94,13 +98,13 @@ __decorate([
     (0, common_1.Get)("/")
 ], UserController.prototype, "getAllUsers", null);
 __decorate([
-    (0, common_1.Get)("/")
+    (0, common_1.Get)("/:id")
 ], UserController.prototype, "findOneUser", null);
 __decorate([
-    (0, common_1.Put)("/")
+    (0, common_1.Put)("/:id")
 ], UserController.prototype, "updateUser", null);
 __decorate([
-    (0, common_1.Delete)("/")
+    (0, common_1.Delete)("/:id")
 ], UserController.prototype, "deleteUser", null);
 UserController = __decorate([
     (0, controller_decorator_1.Controller)("/users")

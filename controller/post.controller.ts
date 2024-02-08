@@ -1,13 +1,18 @@
 import PostService from "../service/post.service"
 import { NextFunction, Request, Response } from "express"
+import { Controller } from "../common/decorators/controller.decorator"
+import { Post, Get, Delete, Put } from "../common"
+import userModel from "../models/user.model"
 
+@Controller("/post")
 class PostController {
   private postService = new PostService()
 
+  @Post("/")
   public async createPost(req: Request, res: Response, next: NextFunction) {
     try {
       const post = await this.postService.createPostService(
-        req.body.user,
+        req.body.userId,
         req.body.mediaType,
         req.body.mediaUrl,
         req.body.caption,
@@ -15,13 +20,21 @@ class PostController {
         req.body.comments,
         req.body.saved
       )
-      res.send(post).status(200).json({ message: "New post created" })
+      // const userId = JSON.parse(req.body.user._id)
+      // const user = await userModel.findById({ userId })
+      // if (!user) {
+      //   throw new Error("User not found")
+      // } else {
+      //   res.json({ Message: "New post created", post }).status(200)
+      // }
+      res.json({ Message: "New post created", post }).status(200)
     } catch (err) {
       console.log(err)
       next(err)
     }
   }
 
+  @Get("/")
   public async getAllPost(req: Request, res: Response, next: NextFunction) {
     try {
       const allPost = await this.postService.findAllPostService()
@@ -32,6 +45,7 @@ class PostController {
     }
   }
 
+  @Get("/:id")
   public async findOnePost(req: Request, res: Response, next: NextFunction) {
     try {
       const post = await this.postService.findOnePostService(req.params.postId)
@@ -42,6 +56,7 @@ class PostController {
     }
   }
 
+  @Put("/:id")
   public async updatePost(req: Request, res: Response, next: NextFunction) {
     try {
       const newPost = await this.postService.updatePostService(
@@ -58,6 +73,7 @@ class PostController {
     }
   }
 
+  @Delete("/:id")
   public async deletePost(req: Request, res: Response, next: NextFunction) {
     try {
       const deletedPost = await this.postService.deletePostService(

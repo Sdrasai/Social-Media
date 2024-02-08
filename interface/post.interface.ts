@@ -19,7 +19,7 @@
 import { Types } from "mongoose"
 
 export interface IPostData {
-  user: any
+  userId: any
   mediaType: string
   mediaUrl: string
   caption: string
