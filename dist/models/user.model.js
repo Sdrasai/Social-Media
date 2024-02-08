@@ -7,9 +7,11 @@ const userSchema = new mongoose_1.Schema({
     email: { type: String, required: true },
     followers: { type: Number },
     following: { type: Number },
-    // followRequest: { type: [String] },
-    post: { type: mongoose_1.Types.ObjectId, ref: "Post" },
+    followRequest: { type: [String] },
+    posts: { type: mongoose_1.Types.ObjectId, ref: "Post" },
     savedPost: { type: mongoose_1.Types.ObjectId, ref: "Post" },
+}, {
+    timestamps: true,
 });
 const userModel = (0, mongoose_1.model)("User", userSchema);
 exports.default = userModel;

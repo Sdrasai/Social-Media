@@ -1,4 +1,5 @@
 import express from "express"
+import { IRoute } from "./interface/route.interface"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 dotenv.config()
@@ -7,11 +8,12 @@ class App {
   private app: express.Application
   public port: any
 
-  constructor() {
+  constructor(routes: IRoute[]) {
     this.app = express()
     this.port = process.env.PORT
 
     this.dbConnection()
+    this.setupRoutes(routes)
   }
 
   public listen() {
@@ -29,6 +31,12 @@ class App {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  private setupRoutes(routes: IRoute[]) {
+    routes.forEach((route) => {
+      this.app.use(route.prefix, route.router)
+    })
   }
 }
 

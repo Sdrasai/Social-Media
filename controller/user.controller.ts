@@ -1,11 +1,16 @@
 import UserService from "../service/user.service"
 import { NextFunction, Request, Response } from "express"
+import { Controller } from "../common/decorators/controller.decorator"
+import { Post, Get, Delete, Put } from "../common"
 
+@Controller("/users")
 class UserController {
   private userService = new UserService()
 
+  @Post("/")
   public async createUsers(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log("salam")
       const newUser = await this.userService.createUserService(
         req.body.username,
         req.body.password,
@@ -18,6 +23,7 @@ class UserController {
     }
   }
 
+  @Get("/")
   public async getAllUsers(req: Request, res: Response, next: NextFunction) {
     try {
       const allUsers = await this.userService.findAllUserService()
@@ -28,6 +34,7 @@ class UserController {
     }
   }
 
+  @Get("/")
   public async findOneUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.findOneUserService(
@@ -40,6 +47,7 @@ class UserController {
     }
   }
 
+  @Put("/")
   public async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.updateUserService(
@@ -60,6 +68,7 @@ class UserController {
     }
   }
 
+  @Delete("/")
   public async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
       const deletedUser = await this.userService.deleteUserService(

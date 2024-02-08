@@ -17,10 +17,11 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 class App {
-    constructor() {
+    constructor(routes) {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT;
         this.dbConnection();
+        this.setupRoutes(routes);
     }
     listen() {
         this.app.listen(this.port, () => {
@@ -36,6 +37,11 @@ class App {
             catch (err) {
                 console.log(err);
             }
+        });
+    }
+    setupRoutes(routes) {
+        routes.forEach((route) => {
+            this.app.use(route.prefix, route.router);
         });
     }
 }

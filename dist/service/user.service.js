@@ -17,17 +17,51 @@ class UserService {
     constructor() {
         this.userModel = user_model_1.default;
     }
-    findAllUser() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.find();
-        });
-    }
-    createUser(username, password, email) {
+    createUserService(username, password, email, followers, following, followRequest, posts, savedPost) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.userModel.create({
                 username,
                 password,
                 email,
+                followers,
+                following,
+                followRequest,
+                posts,
+                savedPost,
+            });
+        });
+    }
+    findAllUserService() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.find();
+        });
+    }
+    findOneUserService(username) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.findOne({ username });
+        });
+    }
+    updateUserService(userId, username, password, email, followers, following, followRequest, posts, savedPost) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.findByIdAndUpdate({
+                userId,
+                username,
+                password,
+                email,
+                followers,
+                following,
+                followRequest,
+                posts,
+                savedPost,
+            });
+        });
+    }
+    deleteUserService(userId, username, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.findByIdAndDelete({
+                userId,
+                username,
+                password,
             });
         });
     }
