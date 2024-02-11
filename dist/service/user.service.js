@@ -36,9 +36,9 @@ class UserService {
             return yield this.userModel.find();
         });
     }
-    findOneUserService(username) {
+    findOneUserService(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.findOne({ username });
+            return yield this.userModel.findOne({ userId });
         });
     }
     updateUserService(userId, username, password, email, followers, following, followRequest, posts, savedPost) {
@@ -56,12 +56,10 @@ class UserService {
             });
         });
     }
-    deleteUserService(userId, username, password) {
+    deleteUserService(userId) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.userModel.findByIdAndDelete({
                 userId,
-                username,
-                password,
             });
         });
     }

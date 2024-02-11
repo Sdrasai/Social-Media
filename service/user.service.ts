@@ -30,8 +30,8 @@ class UserService {
     return await this.userModel.find()
   }
 
-  public async findOneUserService(username: string) {
-    return await this.userModel.findOne({ username })
+  public async findOneUserService(userId: string) {
+    return await this.userModel.findOne({ userId })
   }
 
   public async updateUserService(
@@ -58,15 +58,9 @@ class UserService {
     })
   }
 
-  public async deleteUserService(
-    userId: string,
-    username: string,
-    password: string
-  ) {
+  public async deleteUserService(userId: string) {
     return await this.userModel.findByIdAndDelete({
       userId,
-      username,
-      password,
     })
   }
 }

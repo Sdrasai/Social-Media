@@ -34,7 +34,6 @@ export interface ILikesData {
 }
 
 export interface ICommentsData {
-  byUser: string[]
-  commentsMessage: string[]
+  commentsMessages: [{ userId: string; message: string }]
   commentsNumber: number
 }

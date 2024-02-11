@@ -67,5 +67,19 @@ class PostService {
             return yield this.postModel.deleteMany({ postId });
         });
     }
+    addCommentToPostService(postId, userId, message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const post = yield this.postModel.findById(postId);
+            if (!post) {
+                throw new Error("Post not found!");
+            }
+            post.comments.commentsMessages.push({
+                userId: userId,
+                message: message,
+            });
+            post.comments.commentsNumber += 1;
+            return post;
+        });
+    }
 }
 exports.default = PostService;

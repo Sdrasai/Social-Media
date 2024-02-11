@@ -62,6 +62,23 @@ class PostService {
   public async deletePostService(postId: string) {
     return await this.postModel.deleteMany({ postId })
   }
+
+  public async addCommentToPostService(
+    postId: string,
+    userId: string,
+    message: string
+  ) {
+    const post = await this.postModel.findById(postId)
+    if (!post) {
+      throw new Error("Post not found!")
+    }
+    post.comments.commentsMessages.push({
+      userId: userId,
+      message: message,
+    })
+    post.comments.commentsNumber += 1
+    return post
+  }
 }
 
 export default PostService

@@ -3,16 +3,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const postSchema = new mongoose_1.Schema({
     userId: { type: mongoose_1.Types.ObjectId, required: true },
-    mediaType: { type: String, enum: ["Picture", "Video"], default: "Picture" }, // Assuming mediaType can be either Picture or Video
+    mediaType: { type: String, enum: ["Picture", "Video"], default: "Picture" },
     mediaUrl: { type: String, required: true },
     caption: { type: String },
     likes: {
-        byUser: { type: [String], default: [] }, // Assuming byUser is an array of user IDs
+        byUser: { type: [String], default: [] },
         likesNumber: { type: Number, default: 0 },
     },
     comments: {
-        byUser: { type: [String], default: [] }, // Assuming byUser is an array of user IDs
-        commentsMessage: { type: [String], default: [] },
+        type: Array,
+        commentsMessages: {
+            message: String,
+            byUser: { type: mongoose_1.Types.ObjectId, required: true },
+            default: [],
+        },
         commentsNumber: { type: Number, default: 0 },
     },
     saved: { type: Boolean, default: false },

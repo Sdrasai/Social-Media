@@ -46,9 +46,7 @@ class UserController {
   @Get("/:id")
   public async findOneUser(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = await this.userService.findOneUserService(
-        req.params.username
-      )
+      const user = await this.userService.findOneUserService(req.params.userId)
       res.json(user).status(200)
     } catch (err) {
       console.log(err)
@@ -81,9 +79,7 @@ class UserController {
   public async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
       const deletedUser = await this.userService.deleteUserService(
-        req.params.userId,
-        req.body.username,
-        req.body.password
+        req.params.userId
       )
       res.json(deletedUser).status(200)
     } catch (err) {

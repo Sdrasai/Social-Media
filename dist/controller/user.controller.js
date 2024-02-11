@@ -57,7 +57,7 @@ let UserController = class UserController {
     findOneUser(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield this.userService.findOneUserService(req.params.username);
+                const user = yield this.userService.findOneUserService(req.params.userId);
                 res.json(user).status(200);
             }
             catch (err) {
@@ -81,7 +81,7 @@ let UserController = class UserController {
     deleteUser(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const deletedUser = yield this.userService.deleteUserService(req.params.userId, req.body.username, req.body.password);
+                const deletedUser = yield this.userService.deleteUserService(req.params.userId);
                 res.json(deletedUser).status(200);
             }
             catch (err) {
