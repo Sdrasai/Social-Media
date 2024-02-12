@@ -70,8 +70,10 @@ class PostService {
     addCommentToPostService(postId, userId, message) {
         return __awaiter(this, void 0, void 0, function* () {
             const post = yield this.postModel.findById(postId);
+            console.log("PostIddddddd", postId);
+            console.log("Posttttttt", post);
             if (!post) {
-                throw new Error("Post not found!");
+                throw new Error("Post not found");
             }
             post.comments.commentsMessages.push({
                 userId: userId,

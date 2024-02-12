@@ -69,9 +69,13 @@ class PostService {
     message: string
   ) {
     const post = await this.postModel.findById(postId)
+    console.log("PostIddddddd", postId)
+    console.log("Posttttttt", post)
+
     if (!post) {
-      throw new Error("Post not found!")
+      throw new Error("Post not found")
     }
+
     post.comments.commentsMessages.push({
       userId: userId,
       message: message,

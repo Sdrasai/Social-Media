@@ -37,3 +37,14 @@ export interface ICommentsData {
   commentsMessages: [{ userId: string; message: string }]
   commentsNumber: number
 }
+
+// comments: {
+//   type: ICommentsData[] // Array of comment objects
+//   default: never[] // Default value is an empty array
+//   commentsNumber: number // Number of comments
+// }
+
+// export interface ICommentsData {
+//   message: string
+//   byUser: Types.ObjectId
+// }

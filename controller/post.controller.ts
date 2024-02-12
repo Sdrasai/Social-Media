@@ -88,6 +88,19 @@ class PostController {
       next(err)
     }
   }
+  @Put("/comments/:postId")
+  public async addCommentToPost(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const comment = await this.postService.addCommentToPostService(
+      req.params.postId,
+      req.body.userId,
+      req.body.message
+    )
+    res.json({ message: "Comment added", comment }).status(200)
+  }
 }
 
 export default PostController

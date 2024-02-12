@@ -95,6 +95,12 @@ let PostController = class PostController {
             }
         });
     }
+    addCommentToPost(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const comment = yield this.postService.addCommentToPostService(req.params.postId, req.body.userId, req.body.message);
+            res.json({ message: "Comment added", comment }).status(200);
+        });
+    }
 };
 __decorate([
     (0, common_1.Post)("/")
@@ -111,6 +117,9 @@ __decorate([
 __decorate([
     (0, common_1.Delete)("/:id")
 ], PostController.prototype, "deletePost", null);
+__decorate([
+    (0, common_1.Put)("/comments/:postId")
+], PostController.prototype, "addCommentToPost", null);
 PostController = __decorate([
     (0, controller_decorator_1.Controller)("/post")
 ], PostController);

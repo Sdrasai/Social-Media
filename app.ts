@@ -28,7 +28,7 @@ class App {
       await mongoose.connect(
         `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
       )
-      console.log("Connected to DB")
+      console.log("Connected to DB...")
     } catch (err) {
       console.log(err)
     }

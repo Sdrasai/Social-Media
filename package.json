@@ -14,7 +14,8 @@
     "mongo": "^0.1.0",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3",
-    "reflect-metadata": "^0.2.1"
+    "reflect-metadata": "^0.2.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
