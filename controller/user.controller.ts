@@ -4,10 +4,14 @@ import { Controller } from "../common/decorators/controller.decorator"
 import { Post, Get, Delete, Put, Middleware } from "../common"
 import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto"
 import validationMiddleware from "../middlewares/validation.middleware"
+import { Hash } from "../utils/hashPassword"
+import { Token } from "../utils/createToken"
 
 @Controller("/users")
 class UserController {
   private userService = new UserService()
+  private hash = new Hash()
+  private tokenClass = new Token()
 
   @Post("/")
   @Middleware(validationMiddleware(CreateUserDto, "body"))
@@ -86,6 +90,36 @@ class UserController {
         req.params.userId
       )
       res.json(deletedUser).status(200)
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
+  }
+
+  public async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = await this.userService.checkingUserService(
+        req.body.username,
+        req.body.password
+      )
+      if (!user) {
+        throw new Error("Username or password is not correct!")
+      }
+      const verified = await this.hash.comparingPassword(
+        req.body.password,
+        user.password
+      )
+      if (!verified) {
+        throw new Error("Username or password is not correct!")
+      }
+      const token = await this.tokenClass.createToken(
+        { userName },
+        process.env.SECRET_KEY,
+        process.env.ACCESS_TOKEN_TIME,
+        process.env.REFRESH_TOKEN_TIME,
+        userName
+      )
+      return res.json({ token })
     } catch (err) {
       console.log(err)
       next(err)

@@ -63,6 +63,10 @@ class UserService {
       userId,
     })
   }
+
+  public async checkingUserService(username: string, password: string) {
+    return await this.userModel.findOne({ username })
+  }
 }
 
 export default UserService

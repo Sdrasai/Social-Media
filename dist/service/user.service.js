@@ -63,6 +63,11 @@ class UserService {
             });
         });
     }
+    checkingUserService(username, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userModel.findOne({ username });
+        });
+    }
 }
 exports.default = UserService;
 //# sourceMappingURL=user.service.js.map

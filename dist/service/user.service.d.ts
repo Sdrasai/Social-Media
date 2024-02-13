@@ -263,5 +263,64 @@ declare class UserService {
     } & {
         _id: import("mongoose").Types.ObjectId;
     }) | null>;
+    checkingUserService(username: string, password: string): Promise<(import("mongoose").Document<unknown, {}, {
+        createdAt: NativeDate;
+        updatedAt: NativeDate;
+    } & {
+        username: string;
+        password: string;
+        email: string;
+        followers: number;
+        following: number;
+        followRequest: string[];
+        posts: {
+            prototype?: import("mongoose").Types.ObjectId | null | undefined;
+            cacheHexString?: unknown;
+            generate?: {} | null | undefined;
+            createFromTime?: {} | null | undefined;
+            createFromHexString?: {} | null | undefined;
+            createFromBase64?: {} | null | undefined;
+            isValid?: {} | null | undefined;
+        };
+        savedPost: {
+            prototype?: import("mongoose").Types.ObjectId | null | undefined;
+            cacheHexString?: unknown;
+            generate?: {} | null | undefined;
+            createFromTime?: {} | null | undefined;
+            createFromHexString?: {} | null | undefined;
+            createFromBase64?: {} | null | undefined;
+            isValid?: {} | null | undefined;
+        };
+    }> & {
+        createdAt: NativeDate;
+        updatedAt: NativeDate;
+    } & {
+        username: string;
+        password: string;
+        email: string;
+        followers: number;
+        following: number;
+        followRequest: string[];
+        posts: {
+            prototype?: import("mongoose").Types.ObjectId | null | undefined;
+            cacheHexString?: unknown;
+            generate?: {} | null | undefined;
+            createFromTime?: {} | null | undefined;
+            createFromHexString?: {} | null | undefined;
+            createFromBase64?: {} | null | undefined;
+            isValid?: {} | null | undefined;
+        };
+        savedPost: {
+            prototype?: import("mongoose").Types.ObjectId | null | undefined;
+            cacheHexString?: unknown;
+            generate?: {} | null | undefined;
+            createFromTime?: {} | null | undefined;
+            createFromHexString?: {} | null | undefined;
+            createFromBase64?: {} | null | undefined;
+            isValid?: {} | null | undefined;
+        };
+    } & {
+        _id: import("mongoose").Types.ObjectId;
+    }) | null>;
 }
 export default UserService;

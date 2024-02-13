@@ -2,7 +2,6 @@ import PostService from "../service/post.service"
 import { NextFunction, Request, Response } from "express"
 import { Controller } from "../common/decorators/controller.decorator"
 import { Post, Get, Delete, Put } from "../common"
-import userModel from "../models/user.model"
 
 @Controller("/post")
 class PostController {
@@ -20,13 +19,6 @@ class PostController {
         req.body.comments,
         req.body.saved
       )
-      // const userId = JSON.parse(req.body.user._id)
-      // const user = await userModel.findById({ userId })
-      // if (!user) {
-      //   throw new Error("User not found")
-      // } else {
-      //   res.json({ Message: "New post created", post }).status(200)
-      // }
       res.json({ Message: "New post created", post }).status(200)
     } catch (err) {
       console.log(err)
