@@ -5,3 +5,4 @@ exports.PATH_METADATA = "prefix";
 exports.ROUTE_METADATA = "routes";
 exports.MIDDLEWARE_METADATA = "middlewares";
 exports.CLASS_MIDDLEWARE_METADATA = "__class_middlewar__";
+//# sourceMappingURL=constants.js.map

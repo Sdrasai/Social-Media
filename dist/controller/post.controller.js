@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -71,7 +74,7 @@ let PostController = class PostController {
     updatePost(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newPost = yield this.postService.updatePostService(req.body.postId, req.body.caption, req.body.likes, req.body.comments, req.body.saved);
+                const newPost = yield this.postService.updatePostService(req.params.postId, req.body.caption, req.body.likes, req.body.comments, req.body.saved);
                 res.send(newPost).status(200).json({ message: "Post has been updated" });
             }
             catch (err) {
@@ -103,24 +106,43 @@ let PostController = class PostController {
     }
 };
 __decorate([
-    (0, common_1.Post)("/")
+    (0, common_1.Post)("/"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
 ], PostController.prototype, "createPost", null);
 __decorate([
-    (0, common_1.Get)("/")
+    (0, common_1.Get)("/"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
 ], PostController.prototype, "getAllPost", null);
 __decorate([
-    (0, common_1.Get)("/:id")
+    (0, common_1.Get)("/:id"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
 ], PostController.prototype, "findOnePost", null);
 __decorate([
-    (0, common_1.Put)("/:id")
+    (0, common_1.Put)("/:postId"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
 ], PostController.prototype, "updatePost", null);
 __decorate([
-    (0, common_1.Delete)("/:id")
+    (0, common_1.Delete)("/:postId"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
 ], PostController.prototype, "deletePost", null);
 __decorate([
-    (0, common_1.Put)("/comments/:postId")
+    (0, common_1.Put)("/comments/:postId"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
 ], PostController.prototype, "addCommentToPost", null);
 PostController = __decorate([
     (0, controller_decorator_1.Controller)("/post")
 ], PostController);
 exports.default = PostController;
+//# sourceMappingURL=post.controller.js.map

@@ -12,3 +12,4 @@ const Controller = (prefix = "") => {
     };
 };
 exports.Controller = Controller;
+//# sourceMappingURL=controller.decorator.js.map

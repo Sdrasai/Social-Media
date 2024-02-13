@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const http_exception_1 = require("./exceptions/http.exception");
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -49,5 +50,14 @@ class App {
             this.app.use(route.prefix, route.router);
         });
     }
+    errorHandler() {
+        this.app.use((err, req, res, next) => {
+            if (err instanceof http_exception_1.HttpException) {
+                return res.status(err.statusCode).send(err.message);
+            }
+            return res.send(err.message);
+        });
+    }
 }
 exports.default = App;
+//# sourceMappingURL=app.js.map

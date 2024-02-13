@@ -56,11 +56,11 @@ class PostController {
     }
   }
 
-  @Put("/:id")
+  @Put("/:postId")
   public async updatePost(req: Request, res: Response, next: NextFunction) {
     try {
       const newPost = await this.postService.updatePostService(
-        req.body.postId,
+        req.params.postId,
         req.body.caption,
         req.body.likes,
         req.body.comments,
@@ -73,7 +73,7 @@ class PostController {
     }
   }
 
-  @Delete("/:id")
+  @Delete("/:postId")
   public async deletePost(req: Request, res: Response, next: NextFunction) {
     try {
       const deletedPost = await this.postService.deletePostService(

@@ -8,3 +8,4 @@ var RequestMethod;
     RequestMethod["PUT"] = "put";
     RequestMethod["DELETE"] = "delete";
 })(RequestMethod || (exports.RequestMethod = RequestMethod = {}));
+//# sourceMappingURL=request-method.enum.js.map

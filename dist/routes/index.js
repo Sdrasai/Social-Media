@@ -7,3 +7,4 @@ const index_1 = __importDefault(require("../common/route/index"));
 class IndexRoute extends index_1.default {
 }
 exports.default = IndexRoute;
+//# sourceMappingURL=index.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"http.exception.js","sourceRoot":"","sources":["../../exceptions/http.exception.ts"],"names":[],"mappings":";;;AAAA,MAAa,aAAc,SAAQ,KAAK;IAItC,YAAY,UAAkB,EAAE,OAAe;QAC7C,KAAK,CAAC,OAAO,CAAC,CAAA;QACd,IAAI,CAAC,UAAU,GAAG,UAAU,CAAA;QAC5B,IAAI,CAAC,OAAO,GAAG,OAAO,CAAA;IACxB,CAAC;CACF;AATD,sCASC"}

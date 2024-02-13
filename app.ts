@@ -1,4 +1,6 @@
 import express from "express"
+import { Request, Response, NextFunction } from "express"
+import { HttpException } from "./exceptions/http.exception"
 import { IRoute } from "./interface/route.interface"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
@@ -43,6 +45,16 @@ class App {
     routes.forEach((route) => {
       this.app.use(route.prefix, route.router)
     })
+  }
+  private errorHandler() {
+    this.app.use(
+      (err: Error, req: Request, res: Response, next: NextFunction) => {
+        if (err instanceof HttpException) {
+          return res.status(err.statusCode).send(err.message)
+        }
+        return res.send(err.message)
+      }
+    )
   }
 }
 

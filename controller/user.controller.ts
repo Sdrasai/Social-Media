@@ -1,13 +1,16 @@
 import UserService from "../service/user.service"
 import { NextFunction, Request, Response } from "express"
 import { Controller } from "../common/decorators/controller.decorator"
-import { Post, Get, Delete, Put } from "../common"
+import { Post, Get, Delete, Put, Middleware } from "../common"
+import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto"
+import validationMiddleware from "../middlewares/validation.middleware"
 
 @Controller("/users")
 class UserController {
   private userService = new UserService()
 
   @Post("/")
+  @Middleware(validationMiddleware(CreateUserDto, "body"))
   public async createUsers(req: Request, res: Response, next: NextFunction) {
     try {
       const newUser = await this.userService.createUserService(
@@ -54,7 +57,8 @@ class UserController {
     }
   }
 
-  @Put("/:id")
+  @Put("/:userId")
+  @Middleware(validationMiddleware(UpdateUserDto, "body", true))
   public async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.updateUserService(

@@ -24,3 +24,4 @@ const Middleware = (...handlers) => {
     };
 };
 exports.Middleware = Middleware;
+//# sourceMappingURL=middleware.decorator.js.map

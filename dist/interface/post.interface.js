@@ -13,3 +13,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   message: string
 //   byUser: Types.ObjectId
 // }
+//# sourceMappingURL=post.interface.js.map

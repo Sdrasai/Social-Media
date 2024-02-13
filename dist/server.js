@@ -13,3 +13,4 @@ const app = new app_1.default([
     new post_route_1.default(post_controller_1.default),
 ]);
 app.listen();
+//# sourceMappingURL=server.js.map

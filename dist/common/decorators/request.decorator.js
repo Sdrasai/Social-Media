@@ -21,3 +21,4 @@ exports.Get = createMappingDecorator(request_method_enum_1.RequestMethod.GET);
 exports.Post = createMappingDecorator(request_method_enum_1.RequestMethod.POST);
 exports.Delete = createMappingDecorator(request_method_enum_1.RequestMethod.DELETE);
 exports.Put = createMappingDecorator(request_method_enum_1.RequestMethod.PUT);
+//# sourceMappingURL=request.decorator.js.map
