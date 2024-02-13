@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_model_1 = __importDefault(require("../models/post.model"));
+const mongodb_1 = require("mongodb");
 class PostService {
     constructor() {
         this.postModel = post_model_1.default;
@@ -45,13 +46,13 @@ class PostService {
     }
     findOnePostService(postId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postModel.findOne({ postId });
+            console.log(postId);
+            return yield this.postModel.findById(new mongodb_1.ObjectId(postId));
         });
     }
     updatePostService(postId, caption, likesByUser, comments, saved) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postModel.findByIdAndUpdate({
-                postId,
+            const updatedPost = yield this.postModel.findByIdAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, {
                 caption,
                 likes: {
                     byUser: likesByUser,
@@ -59,28 +60,33 @@ class PostService {
                 },
                 comments,
                 saved,
-            });
+            }, { new: true });
+            return updatedPost;
         });
     }
     deletePostService(postId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postModel.deleteMany({ postId });
+            return yield this.postModel.deleteMany(new mongodb_1.ObjectId(postId));
         });
     }
     addCommentToPostService(postId, userId, message) {
         return __awaiter(this, void 0, void 0, function* () {
-            const post = yield this.postModel.findById(postId);
+            const post = yield this.postModel.findById(new mongodb_1.ObjectId(postId));
             console.log("PostIddddddd", postId);
             console.log("Posttttttt", post);
             if (!post) {
                 throw new Error("Post not found");
             }
-            post.comments.commentsMessages.push({
-                userId: userId,
-                message: message,
-            });
-            post.comments.commentsNumber += 1;
-            return post;
+            const updatedPost = yield this.postModel.findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, {
+                $push: {
+                    "comments.commentsMessages": {
+                        userId: userId,
+                        message: message,
+                    },
+                },
+                $inc: { "comments.commentsNumber": 1 },
+            }, { new: true });
+            return updatedPost;
         });
     }
 }

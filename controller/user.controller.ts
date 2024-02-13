@@ -96,35 +96,35 @@ class UserController {
     }
   }
 
-  public async login(req: Request, res: Response, next: NextFunction) {
-    try {
-      const user = await this.userService.checkingUserService(
-        req.body.username,
-        req.body.password
-      )
-      if (!user) {
-        throw new Error("Username or password is not correct!")
-      }
-      const verified = await this.hash.comparingPassword(
-        req.body.password,
-        user.password
-      )
-      if (!verified) {
-        throw new Error("Username or password is not correct!")
-      }
-      const token = await this.tokenClass.createToken(
-        { userName },
-        process.env.SECRET_KEY,
-        process.env.ACCESS_TOKEN_TIME,
-        process.env.REFRESH_TOKEN_TIME,
-        userName
-      )
-      return res.json({ token })
-    } catch (err) {
-      console.log(err)
-      next(err)
-    }
-  }
+  // public async login(req: Request, res: Response, next: NextFunction) {
+  //   try {
+  //     const user = await this.userService.checkingUserService(
+  //       req.body.username,
+  //       req.body.password
+  //     )
+  //     if (!user) {
+  //       throw new Error("Username or password is not correct!")
+  //     }
+  //     const verified = await this.hash.comparingPassword(
+  //       req.body.password,
+  //       user.password
+  //     )
+  //     if (!verified) {
+  //       throw new Error("Username or password is not correct!")
+  //     }
+  //     const token = await this.tokenClass.createToken(
+  //       { userName },
+  //       process.env.SECRET_KEY,
+  //       process.env.ACCESS_TOKEN_TIME,
+  //       process.env.REFRESH_TOKEN_TIME,
+  //       userName
+  //     )
+  //     return res.json({ token })
+  //   } catch (err) {
+  //     console.log(err)
+  //     next(err)
+  //   }
+  // }
 }
 
 export default UserController

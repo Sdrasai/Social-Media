@@ -39,8 +39,8 @@ declare class PostService {
         _id: Types.ObjectId;
     }) | null>;
     deletePostService(postId: string): Promise<import("mongodb").DeleteResult>;
-    addCommentToPostService(postId: string, userId: string, message: string): Promise<import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
+    addCommentToPostService(postId: string, userId: string, message: string): Promise<(import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
         _id: Types.ObjectId;
-    }>;
+    }) | null>;
 }
 export default PostService;

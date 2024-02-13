@@ -11,12 +11,13 @@ const postSchema = new mongoose_1.Schema({
         likesNumber: { type: Number, default: 0 },
     },
     comments: {
-        type: Array,
-        commentsMessages: {
-            message: String,
-            byUser: { type: mongoose_1.Types.ObjectId, required: true },
-            default: [],
-        },
+        commentsMessages: [
+            {
+                message: String,
+                byUser: { type: mongoose_1.Types.ObjectId, required: true },
+                default: [],
+            },
+        ],
         commentsNumber: { type: Number, default: 0 },
     },
     saved: { type: Boolean, default: false },

@@ -37,7 +37,7 @@ class PostController {
     }
   }
 
-  @Get("/:id")
+  @Get("/:postId")
   public async findOnePost(req: Request, res: Response, next: NextFunction) {
     try {
       const post = await this.postService.findOnePostService(req.params.postId)
@@ -86,12 +86,16 @@ class PostController {
     res: Response,
     next: NextFunction
   ) {
-    const comment = await this.postService.addCommentToPostService(
-      req.params.postId,
-      req.body.userId,
-      req.body.message
-    )
-    res.json({ message: "Comment added", comment }).status(200)
+    try {
+      const comment = await this.postService.addCommentToPostService(
+        req.params.postId,
+        req.body.userId,
+        req.body.message
+      )
+      res.json({ comment })
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 

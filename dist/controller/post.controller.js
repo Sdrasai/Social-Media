@@ -32,13 +32,6 @@ let PostController = class PostController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const post = yield this.postService.createPostService(req.body.userId, req.body.mediaType, req.body.mediaUrl, req.body.caption, req.body.likes, req.body.comments, req.body.saved);
-                // const userId = JSON.parse(req.body.user._id)
-                // const user = await userModel.findById({ userId })
-                // if (!user) {
-                //   throw new Error("User not found")
-                // } else {
-                //   res.json({ Message: "New post created", post }).status(200)
-                // }
                 res.json({ Message: "New post created", post }).status(200);
             }
             catch (err) {
@@ -100,8 +93,13 @@ let PostController = class PostController {
     }
     addCommentToPost(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const comment = yield this.postService.addCommentToPostService(req.params.postId, req.body.userId, req.body.message);
-            res.json({ message: "Comment added", comment }).status(200);
+            try {
+                const comment = yield this.postService.addCommentToPostService(req.params.postId, req.body.userId, req.body.message);
+                res.json({ comment });
+            }
+            catch (err) {
+                console.log(err);
+            }
         });
     }
 };
@@ -118,7 +116,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getAllPost", null);
 __decorate([
-    (0, common_1.Get)("/:id"),
+    (0, common_1.Get)("/:postId"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Function]),
     __metadata("design:returntype", Promise)

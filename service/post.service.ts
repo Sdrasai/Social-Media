@@ -1,6 +1,7 @@
 import postModel from "../models/post.model"
 import { IPostData } from "../interface/post.interface"
 import { Types } from "mongoose"
+import { ObjectId } from "mongodb"
 import IUser from "../interface/user.interface"
 
 class PostService {
@@ -38,7 +39,8 @@ class PostService {
   }
 
   public async findOnePostService(postId: string) {
-    return await this.postModel.findOne({ postId })
+    console.log(postId)
+    return await this.postModel.findById(new ObjectId(postId))
   }
 
   public async updatePostService(
@@ -48,19 +50,23 @@ class PostService {
     comments?: Partial<IPostData["comments"]>,
     saved?: boolean
   ) {
-    return await this.postModel.findByIdAndUpdate({
-      postId,
-      caption,
-      likes: {
-        byUser: likesByUser,
-        likesNumber: 0,
+    const updatedPost = await this.postModel.findByIdAndUpdate(
+      { _id: new ObjectId(postId) },
+      {
+        caption,
+        likes: {
+          byUser: likesByUser,
+          likesNumber: 0,
+        },
+        comments,
+        saved,
       },
-      comments,
-      saved,
-    })
+      { new: true }
+    )
+    return updatedPost
   }
   public async deletePostService(postId: string) {
-    return await this.postModel.deleteMany({ postId })
+    return await this.postModel.deleteMany(new ObjectId(postId))
   }
 
   public async addCommentToPostService(
@@ -68,20 +74,28 @@ class PostService {
     userId: string,
     message: string
   ) {
-    const post = await this.postModel.findById(postId)
+    const post = await this.postModel.findById(new ObjectId(postId))
     console.log("PostIddddddd", postId)
     console.log("Posttttttt", post)
 
     if (!post) {
       throw new Error("Post not found")
     }
+    const updatedPost = await this.postModel.findOneAndUpdate(
+      { _id: new ObjectId(postId) },
+      {
+        $push: {
+          "comments.commentsMessages": {
+            userId: userId,
+            message: message,
+          },
+        },
+        $inc: { "comments.commentsNumber": 1 },
+      },
+      { new: true }
+    )
 
-    post.comments.commentsMessages.push({
-      userId: userId,
-      message: message,
-    })
-    post.comments.commentsNumber += 1
-    return post
+    return updatedPost
   }
 }
 

@@ -33,6 +33,35 @@ let UserController = class UserController {
         this.userService = new user_service_1.default();
         this.hash = new hashPassword_1.Hash();
         this.tokenClass = new createToken_1.Token();
+        // public async login(req: Request, res: Response, next: NextFunction) {
+        //   try {
+        //     const user = await this.userService.checkingUserService(
+        //       req.body.username,
+        //       req.body.password
+        //     )
+        //     if (!user) {
+        //       throw new Error("Username or password is not correct!")
+        //     }
+        //     const verified = await this.hash.comparingPassword(
+        //       req.body.password,
+        //       user.password
+        //     )
+        //     if (!verified) {
+        //       throw new Error("Username or password is not correct!")
+        //     }
+        //     const token = await this.tokenClass.createToken(
+        //       { userName },
+        //       process.env.SECRET_KEY,
+        //       process.env.ACCESS_TOKEN_TIME,
+        //       process.env.REFRESH_TOKEN_TIME,
+        //       userName
+        //     )
+        //     return res.json({ token })
+        //   } catch (err) {
+        //     console.log(err)
+        //     next(err)
+        //   }
+        // }
     }
     createUsers(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -92,26 +121,6 @@ let UserController = class UserController {
             try {
                 const deletedUser = yield this.userService.deleteUserService(req.params.userId);
                 res.json(deletedUser).status(200);
-            }
-            catch (err) {
-                console.log(err);
-                next(err);
-            }
-        });
-    }
-    login(req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const user = yield this.userService.checkingUserService(req.body.username, req.body.password);
-                if (!user) {
-                    throw new Error("Username or password is not correct!");
-                }
-                const verified = yield this.hash.comparingPassword(req.body.password, user.password);
-                if (!verified) {
-                    throw new Error("Username or password is not correct!");
-                }
-                const token = yield this.tokenClass.createToken({ userName }, process.env.SECRET_KEY, process.env.ACCESS_TOKEN_TIME, process.env.REFRESH_TOKEN_TIME, userName);
-                return res.json({ token });
             }
             catch (err) {
                 console.log(err);

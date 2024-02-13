@@ -16,12 +16,13 @@ const postSchema = new Schema<IPostData>(
       likesNumber: { type: Number, default: 0 },
     },
     comments: {
-      type: Array,
-      commentsMessages: {
-        message: String,
-        byUser: { type: Types.ObjectId, required: true },
-        default: [],
-      },
+      commentsMessages: [
+        {
+          message: String,
+          byUser: { type: Types.ObjectId, required: true },
+          default: [],
+        },
+      ],
       commentsNumber: { type: Number, default: 0 },
     },
     saved: { type: Boolean, default: false },
