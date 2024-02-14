@@ -50,7 +50,7 @@ class UserController {
     }
   }
 
-  @Get("/:id")
+  @Get("/:userId")
   public async findOneUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.findOneUserService(req.params.userId)
@@ -76,20 +76,18 @@ class UserController {
         req.body.post,
         req.body.savedPost
       )
-      res.json(user).status(200)
+      res.send(user).status(200)
     } catch (err) {
       console.log(err)
       next(err)
     }
   }
 
-  @Delete("/:id")
+  @Delete("/:userId")
   public async deleteUser(req: Request, res: Response, next: NextFunction) {
     try {
-      const deletedUser = await this.userService.deleteUserService(
-        req.params.userId
-      )
-      res.json(deletedUser).status(200)
+      await this.userService.deleteUserService(req.params.userId)
+      res.json({ message: "user deleted successfully" }).status(200)
     } catch (err) {
       console.log(err)
       next(err)

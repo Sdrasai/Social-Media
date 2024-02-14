@@ -108,7 +108,7 @@ let UserController = class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const user = yield this.userService.updateUserService(req.params.userId, req.body.username, req.body.password, req.body.email, req.body.followers, req.body.following, req.body.followRequest, req.body.post, req.body.savedPost);
-                res.json(user).status(200);
+                res.send(user).status(200);
             }
             catch (err) {
                 console.log(err);
@@ -119,8 +119,8 @@ let UserController = class UserController {
     deleteUser(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const deletedUser = yield this.userService.deleteUserService(req.params.userId);
-                res.json(deletedUser).status(200);
+                yield this.userService.deleteUserService(req.params.userId);
+                res.json({ message: "user deleted successfully" }).status(200);
             }
             catch (err) {
                 console.log(err);
@@ -143,7 +143,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getAllUsers", null);
 __decorate([
-    (0, common_1.Get)("/:id"),
+    (0, common_1.Get)("/:userId"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Function]),
     __metadata("design:returntype", Promise)
@@ -156,7 +156,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUser", null);
 __decorate([
-    (0, common_1.Delete)("/:id"),
+    (0, common_1.Delete)("/:userId"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Function]),
     __metadata("design:returntype", Promise)

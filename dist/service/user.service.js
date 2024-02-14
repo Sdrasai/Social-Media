@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = __importDefault(require("../models/user.model"));
+const mongodb_1 = require("mongodb");
 class UserService {
     constructor() {
         this.userModel = user_model_1.default;
@@ -38,12 +39,13 @@ class UserService {
     }
     findOneUserService(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.findOne({ userId });
+            console.log(userId);
+            return yield this.userModel.findById(new mongodb_1.ObjectId(userId));
         });
     }
     updateUserService(userId, username, password, email, followers, following, followRequest, posts, savedPost) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.findByIdAndUpdate({
+            const newUser = yield this.userModel.findByIdAndUpdate({ _id: new mongodb_1.ObjectId(userId) }, {
                 userId,
                 username,
                 password,
@@ -53,14 +55,13 @@ class UserService {
                 followRequest,
                 posts,
                 savedPost,
-            });
+            }, { new: true });
+            return newUser;
         });
     }
     deleteUserService(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userModel.findByIdAndDelete({
-                userId,
-            });
+            return yield this.userModel.findByIdAndDelete({ _id: new mongodb_1.ObjectId(userId) });
         });
     }
     checkingUserService(username, password) {

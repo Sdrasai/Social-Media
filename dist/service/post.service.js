@@ -66,7 +66,7 @@ class PostService {
     }
     deletePostService(postId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postModel.deleteMany(new mongodb_1.ObjectId(postId));
+            return yield this.postModel.findByIdAndDelete(new mongodb_1.ObjectId(postId));
         });
     }
     addCommentToPostService(postId, userId, message) {

@@ -79,11 +79,8 @@ let PostController = class PostController {
     deletePost(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const deletedPost = yield this.postService.deletePostService(req.params.postId);
-                res
-                    .send(deletedPost)
-                    .status(200)
-                    .json({ message: "The Post has been deleted" });
+                yield this.postService.deletePostService(req.params.postId);
+                res.json({ message: "The Post has been deleted" }).status(200);
             }
             catch (err) {
                 console.log(err);

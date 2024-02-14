@@ -38,7 +38,9 @@ declare class PostService {
     updatePostService(postId: string, caption?: string, likesByUser?: string[], comments?: Partial<IPostData["comments"]>, saved?: boolean): Promise<(import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
         _id: Types.ObjectId;
     }) | null>;
-    deletePostService(postId: string): Promise<import("mongodb").DeleteResult>;
+    deletePostService(postId: string): Promise<(import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
+        _id: Types.ObjectId;
+    }) | null>;
     addCommentToPostService(postId: string, userId: string, message: string): Promise<(import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
         _id: Types.ObjectId;
     }) | null>;

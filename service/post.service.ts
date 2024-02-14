@@ -66,7 +66,7 @@ class PostService {
     return updatedPost
   }
   public async deletePostService(postId: string) {
-    return await this.postModel.deleteMany(new ObjectId(postId))
+    return await this.postModel.findByIdAndDelete(new ObjectId(postId))
   }
 
   public async addCommentToPostService(

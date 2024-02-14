@@ -68,13 +68,8 @@ class PostController {
   @Delete("/:postId")
   public async deletePost(req: Request, res: Response, next: NextFunction) {
     try {
-      const deletedPost = await this.postService.deletePostService(
-        req.params.postId
-      )
-      res
-        .send(deletedPost)
-        .status(200)
-        .json({ message: "The Post has been deleted" })
+      await this.postService.deletePostService(req.params.postId)
+      res.json({ message: "The Post has been deleted" }).status(200)
     } catch (err) {
       console.log(err)
       next(err)
