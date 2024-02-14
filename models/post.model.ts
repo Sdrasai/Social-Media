@@ -12,7 +12,11 @@ const postSchema = new Schema<IPostData>(
     mediaUrl: { type: String, required: true },
     caption: { type: String },
     likes: {
-      byUser: { type: [String], default: [] },
+      likesArray: [
+        {
+          byUser: { type: Types.ObjectId, required: true, default: [] },
+        },
+      ],
       likesNumber: { type: Number, default: 0 },
     },
     comments: {

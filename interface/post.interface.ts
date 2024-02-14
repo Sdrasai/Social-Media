@@ -29,7 +29,7 @@ export interface IPostData {
 }
 
 export interface ILikesData {
-  byUser: string[]
+  likesArray: [{ userId: string }]
   likesNumber: number
 }
 

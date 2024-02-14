@@ -89,6 +89,20 @@ class PostService {
             return updatedPost;
         });
     }
+    likePostService(postId, userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const post = yield this.postModel.findById(new mongodb_1.ObjectId(postId));
+            console.log(postId);
+            if (!post) {
+                throw new Error("Post not found");
+            }
+            const likedPost = yield this.postModel.findOneAndUpdate({ _id: new mongodb_1.ObjectId(postId) }, {
+                $push: { "likes.likesArray": { byUser: userId } },
+                $inc: { "likes.likesNumber": 1 },
+            }, { new: true });
+            return likedPost;
+        });
+    }
 }
 exports.default = PostService;
 //# sourceMappingURL=post.service.js.map

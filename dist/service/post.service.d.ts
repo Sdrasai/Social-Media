@@ -44,5 +44,8 @@ declare class PostService {
     addCommentToPostService(postId: string, userId: string, message: string): Promise<(import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
         _id: Types.ObjectId;
     }) | null>;
+    likePostService(postId: string, userId: string): Promise<(import("mongoose").Document<unknown, {}, IPostData> & IPostData & {
+        _id: Types.ObjectId;
+    }) | null>;
 }
 export default PostService;

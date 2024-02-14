@@ -92,6 +92,18 @@ class PostController {
       console.log(err)
     }
   }
+  @Put("/like/:postId")
+  public async likePost(req: Request, res: Response, next: NextFunction) {
+    try {
+      const like = await this.postService.likePostService(
+        req.params.postId,
+        req.body.userId
+      )
+      res.json(like)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 export default PostController

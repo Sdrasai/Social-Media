@@ -97,6 +97,23 @@ class PostService {
 
     return updatedPost
   }
+
+  public async likePostService(postId: string, userId: string) {
+    const post = await this.postModel.findById(new ObjectId(postId))
+    console.log(postId)
+    if (!post) {
+      throw new Error("Post not found")
+    }
+    const likedPost = await this.postModel.findOneAndUpdate(
+      { _id: new ObjectId(postId) },
+      {
+        $push: { "likes.likesArray": { byUser: userId } },
+        $inc: { "likes.likesNumber": 1 },
+      },
+      { new: true }
+    )
+    return likedPost
+  }
 }
 
 export default PostService

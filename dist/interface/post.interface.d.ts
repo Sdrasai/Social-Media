@@ -8,7 +8,9 @@ export interface IPostData {
     saved: boolean;
 }
 export interface ILikesData {
-    byUser: string[];
+    likesArray: [{
+        userId: string;
+    }];
     likesNumber: number;
 }
 export interface ICommentsData {

@@ -7,5 +7,6 @@ declare class PostController {
     updatePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     deletePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     addCommentToPost(req: Request, res: Response, next: NextFunction): Promise<void>;
+    likePost(req: Request, res: Response, next: NextFunction): Promise<void>;
 }
 export default PostController;

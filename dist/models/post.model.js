@@ -7,7 +7,12 @@ const postSchema = new mongoose_1.Schema({
     mediaUrl: { type: String, required: true },
     caption: { type: String },
     likes: {
-        byUser: { type: [String], default: [] },
+        likesArray: [
+            {
+                byUser: { type: mongoose_1.Types.ObjectId, required: true },
+                default: [],
+            },
+        ],
         likesNumber: { type: Number, default: 0 },
     },
     comments: {

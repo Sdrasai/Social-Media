@@ -99,6 +99,17 @@ let PostController = class PostController {
             }
         });
     }
+    likePost(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const like = yield this.postService.likePostService(req.params.postId, req.body.userId);
+                res.json(like);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    }
 };
 __decorate([
     (0, common_1.Post)("/"),
@@ -136,6 +147,12 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Function]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "addCommentToPost", null);
+__decorate([
+    (0, common_1.Put)("/like/:postId"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Function]),
+    __metadata("design:returntype", Promise)
+], PostController.prototype, "likePost", null);
 PostController = __decorate([
     (0, controller_decorator_1.Controller)("/post")
 ], PostController);
